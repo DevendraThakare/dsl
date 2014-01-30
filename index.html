@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://www.w3resource.com/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css"> -->
+    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src='js/typeahead.js'></script>
+    <script type="text/javascript" src='js/main.js'></script>
+  </head>
+  <body>
+    <div id="main-content">
+      <div class="map-wrap">
+        <div id="map-canvas"></div>
+        <div id="city-list-container" style="display: inline-block;">
+          <ul class="city-menu">
+            <li class="active city" data-value="1">Mumbai</li>
+            <li class="city" data-value="40">Delhi</li>
+            <li class="city" data-value="35">Gurgaon</li>
+            <li class="city" data-value="37">Pune</li>
+            <li class="city" data-value="75">Faridabad</li>
+            <li class="city" data-value="41">Ghaziabad</li>
+            <li class="city" data-value="39">Noida</li>
+            <li class="city" data-value="36">Hyderabad</li>
+            <li class="city" data-value="74">Chennai</li>
+            <li class="city" data-value="38">Bangalore</li>
+            <li class="city" data-value="76">Kolkata</li>
+          </ul>
+        </div>
+        <div class="legends-wrap"></div>
+        <div class="controls-wrap">
+          <span class="control active" data-type="rent">Rent</span>
+          <span class="control" data-type="buy">Buy</span>
+        </div>
+        <div id="message">The Message</div>
+        <div class="query-wrap">
+          <input type="text" id="query" placeholder="Search by locality" autocomplete="off"/>
+        </div>
+      </div>
+      <div id="info">
+        <div class="info-header">
+          <span class="locality-name"></span>
+        </div>
+        <div class="info-content">
+          <div class="price_wrap">
+            <div class="price_header">By Price Range <span class="sub">inventory / req. inventory</span></div>
+            <div class="price_info"></div>
+          </div>
+          <div class="apartment_type_wrap">
+            <div class="apartment_type_header">By Apartment Type <span class="sub">inventory / req. inventory</span></div>
+            <div class="apartment_type_info"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
