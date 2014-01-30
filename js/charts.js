@@ -71,5 +71,7 @@ $(document).ready(function(){
   drawChart(get_data_table(response), 'listing_requests');
   $('.inv-chart-filter').html(get_multiselect_filter(apart_type_arr, 'appartment_type'));
   $('.listing-requests-chart-filter').html(get_singleselect_filter(owner_type_arr, 'owner_type'));
+  $('.show-charts').click(function(e){
+    $('.charts-wraper').addClass('visible');
+  });
 });
-

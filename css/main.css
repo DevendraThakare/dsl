@@ -1,16 +1,8 @@
-html, body, #map-canvas, #main-content {
+#map-canvas, #main-content {
     height: 100%;
     margin: 0px;
     padding: 0px;
     width:100%;
-}
-body{
-    margin: 0;
-    font-family: "proxima-nova","Calibri","Cantarell",sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    color: #333;
-    background-color: #FFF;
 }
 .map-wrap{
     position: absolute;

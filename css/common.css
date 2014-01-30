@@ -1,0 +1,21 @@
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width:100%;
+}
+body{
+    margin: 0;
+    font-family: "Calibri","Cantarell",sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    background-color: #FFF;
+}
+.clearfix:after {
+   content: " ";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}

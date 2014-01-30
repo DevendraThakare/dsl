@@ -1,30 +1,23 @@
-html, body{
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    width:100%;
-}
-body{
-    margin: 0;
-    font-family: "Calibri","Cantarell",sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    color: #333;
-    background-color: #FFF;
-}
-.clearfix:after {
-   content: " "; /* Older browser do not support empty content */
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
-}
 .charts-wraper{
-	position: relative;
-  	top: 50%;
-  	-webkit-transform: translateY(-50%);
-  	-moz-transform: translateY(-50%);
-  	transform: translateY(-50%);
+	position: absolute;
+  left:0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: #fff;
+  opacity: 0;
+  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+  transition: opacity 0.8s ease-out;
+  -webki-transition: opacity 0.8s ease-out;
+  -moz-transition: opacity 0.8s ease-out;
+}
+.charts-wraper.visible{
+  opacity: 1;
+   transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
 }
 .inv-chart-wrap, .listing-requests-chart-wrap{
 	float: left;

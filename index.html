@@ -4,12 +4,9 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="http://www.w3resource.com/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css"> -->
-    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script type="text/javascript" src='js/typeahead.js'></script>
-    <script type="text/javascript" src='js/main.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/charts.css">
   </head>
   <body>
     <div id="main-content">
@@ -39,6 +36,16 @@
         <div class="query-wrap">
           <input type="text" id="query" placeholder="Search by locality" autocomplete="off"/>
         </div>
+        <div class="charts-wraper clearfix">
+          <div class="inv-chart-wrap">
+            <div class="filter-wrap inv-chart-filter clearfix"></div>
+            <div id="inv-chart"></div>
+          </div>
+          <div class="listing-requests-chart-wrap">
+            <div class="filter-wrap listing-requests-chart-filter clearfix"></div>
+            <div id="listing-requests-chart"></div>
+          </div>
+        </div>
       </div>
       <div id="info">
         <div class="info-header">
@@ -53,8 +60,18 @@
             <div class="apartment_type_header">By Apartment Type <span class="sub">inventory / req. inventory</span></div>
             <div class="apartment_type_info"></div>
           </div>
+          <div class="chart-control-wrap">
+            <button class="show-charts">Show Charts</button>
+          </div>
         </div>
       </div>
     </div>
+    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+    <script src='js/underscore-min.js'></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src='js/typeahead.js'></script>
+    <script type="text/javascript" src='js/main.js'></script>
+    <script type="text/javascript" src='js/charts.js'></script>
   </body>
 </html>
