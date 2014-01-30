@@ -89,7 +89,7 @@
     width: 250px;
     position: absolute;
     top: 29px;
-    bottom: 0px;
+    bottom: 40px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -132,8 +132,8 @@
     width: 100%;
     text-align: center;
     background-color: rgba(255, 121, 26, 0.9);
-    font-size: 24px;
-    padding: 12px 0px;
+    font-size: 18px;
+    padding: 6px 0px;
     color: #fff;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     border: 1px rgba(255, 255, 255, 0.08) solid;
@@ -392,4 +392,13 @@
 .tt-suggestion.tt-is-under-cursor {
     background-color:rgba(53, 142, 251, 0.8);
     color: #fff;
+}
+.chart-control-wrap{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    background-color: #FFF;
+    background-color: #EEE;
+    border-top: 1px solid #D6D6D6;
 }

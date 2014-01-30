@@ -160,9 +160,7 @@ decodePolygonMK2 = function(t,c,apartment_type_data, price_data, locality,ratio,
       window.marker.setPosition(latlng);
       $('#info .locality-name').text(locality);
       apartment_type_data_obj = $.parseJSON(apartment_type_data);
-      console.log(apartment_type_data_obj);
       price_data_obj = $.parseJSON(price_data);
-      console.log(price_data_obj);
       $('#info .message').removeClass('alert');
       // this.setOptions({fillOpacity : 0.7, strokeWeight:0});
       if(apartment_type_data_obj){

@@ -77,4 +77,9 @@ $(document).ready(function(){
   $('.close-charts').click(function(e){
     $('.charts-wraper').removeClass('visible');
   });
+  $('body').keypress(function(e){
+    if(e.which == 27){
+      $('.charts-wraper').removeClass('visible');
+    }
+  });
 });
