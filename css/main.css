@@ -21,6 +21,7 @@
 }
 #main-content{
     position: relative;
+    overflow: hidden;
 }
 #city-list-container{
     position: absolute;
