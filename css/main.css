@@ -53,16 +53,6 @@
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
-.apartment_type_wrap, .price_wrap{
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-.price_wrap{
-    height:40%;
-}
-.apartment_type_wrap{
-    height:60%;
-}
 .city.active, .control.active{
     background-color: rgba(53, 142, 251, 0.8);
     color: #fff;
@@ -97,7 +87,11 @@
 }
 .info-content{
     width: 250px;
-    overflow: auto;
+    position: absolute;
+    top: 29px;
+    bottom: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .inv-dem-ratio{
@@ -109,10 +103,14 @@
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 .inv-dem-ratio.alert{
-    background-color: #FF6464;
-    color: #fff;
+    /*background-color: #FF6464;
+    color: #fff;*/
+    color: #FF4747;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: none;
 }
-#message{
+/*#message{
     position: absolute;
     top: 0;
     left: 50%;
@@ -127,24 +125,37 @@
     border: 1px rgba(255, 255, 255, 0.08) solid;
     border-top-width: 0px;
     display: none;
+}*/
+#message{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 121, 26, 0.9);
+    font-size: 24px;
+    padding: 25px 10px;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    border: 1px rgba(255, 255, 255, 0.08) solid;
+    border-top-width: 0px;
+    display: none;
 }
 #message.alert{
     background-color: #FF6464;
-    animation-name: myfirst;
+   /* animation-name: myfirst;
     animation-duration: 0.8s;
     animation-timing-function: linear;
     animation-delay: 0.4s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-play-state: running;
-    /* Safari and Chrome: */
     -webkit-animation-name: myfirst;
     -webkit-animation-duration: 0.8s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-delay: 0.4s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: alternate;
-    -webkit-animation-play-state: running;
+    -webkit-animation-play-state: running;*/
 }
 @keyframes myfirst
 {
@@ -169,12 +180,10 @@
     border: 1px solid rgba(0, 0, 0, 0.04);
 }
 .price_wrap{
-    border-bottom: 10px solid #ccc;
+    border-bottom: 4px solid #ccc;
 }
 .apartment_type_info, .price_info{
-    /*height: 260px;*/
-    overflow: auto;
-    /*padding: 10px;*/
+    
 }
 .apartment_type_info > ul, .price_info > ul{
     margin: 0px;
@@ -217,6 +226,9 @@
 }
 .un_expandable{
     width: 100%;
+}
+.un_expandable .list-header{
+    background-color: #fff;
 }
 .un_expandable .list-header:before{
     display: none;
@@ -285,18 +297,24 @@
 }
 
 .control{
-    padding: 5px 20px;
+   line-height: 1.4em;
+   display: block;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px rgba(255, 255, 255, 0.08) solid;
+    text-align: center;
     font-size: 13px;
+    min-width: 100px;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    background-color:rgba(255, 255, 255, 0.8);
-    cursor: pointer;
 }
 .query-wrap{
     position: absolute;
-    top: 22px;
+    top: 18px;
     left:180px;
 }
 #tt{

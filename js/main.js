@@ -234,7 +234,7 @@ function makeTree(obj){
           // .append($('<li/>').append('<h4/>').addClass('list-header').text(key).append(makeTree(obj[key])));
           expand_class = '';
           // debugger;
-          if(obj[key]['inventory'] || obj[key]['req.inventory'])
+          if(obj[key]['inventory']!=null || obj[key]['req.inventory']!=null)
             expand_class = 'un_expandable';
           html = html + '<ul class="has-children '+expand_class+'">';
           html = html + '<li> <h4 class="list-header">'+key;
