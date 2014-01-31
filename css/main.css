@@ -89,7 +89,7 @@
     width: 250px;
     position: absolute;
     top: 29px;
-    bottom: 40px;
+    bottom: 32px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -97,7 +97,7 @@
 .inv-dem-ratio{
     position: absolute;
     right: 5px;
-    top: 4px;
+    top: 8px;
     padding: 0px 5px;
     font-size: 12px;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
@@ -200,9 +200,9 @@
 
 .info-content .list-header{
     margin:0px 0px 1px 0px;
-    padding: 5px 22px;
+    padding: 8px 22px;
     background-color: rgba(0, 0, 0, 0.04);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: normal;
     cursor: pointer;
     position: relative;
@@ -218,7 +218,7 @@
     content: "";
     position: absolute;
     left: 10px;
-    top: 8px;
+    top: 13px;
     border-left: 4px solid #000;
     border-top: 4px solid rgba(0, 0, 0, 0);
     border-bottom: 4px solid rgba(0, 0, 0, 0);
@@ -229,13 +229,14 @@
 }
 .un_expandable .list-header{
     background-color: #fff;
+    cursor: auto;
 }
 .un_expandable .list-header:before{
     display: none;
 }
 #info .expanded .list-header:before{
     left: 8px;
-    top: 10px;
+    top: 16px;
     border-top: 4px solid #000;
     border-right: 4px solid rgba(0, 0, 0, 0);
     border-left: 4px solid rgba(0, 0, 0, 0);
@@ -312,18 +313,6 @@
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
-.query-wrap{
-    position: absolute;
-    top: 18px;
-    left:180px;
-}
-#tt{
-    background-color:rgba(255, 255, 255, 0.8);
-    padding: 15px;  
-}
-.tt-message{
-    color: #f00;
-}
 .message{
     padding: 5px;
     text-align: center;
@@ -337,7 +326,7 @@
     font-size: 9px;
     width: 110px;
     right: 8px;
-    bottom: 4px;
+    bottom: 0px;
 }
 ::-webkit-scrollbar {
     width: 8px;
@@ -357,11 +346,13 @@
     color: #FFF;
 }
 .query-wrap{
-    /*background-color: #fff;*/
+    position: absolute;
+    top: 18px;
+    left:156px;
 }
 #query{
     padding: 6px 20px;
-    width: 150px;
+    width: 180px;
     background-color: #FFF !important;
     border: 1px solid #F3F3F3;
     outline: none;
@@ -392,6 +383,28 @@
 .tt-suggestion.tt-is-under-cursor {
     background-color:rgba(53, 142, 251, 0.8);
     color: #fff;
+}
+
+
+#tt{
+    background-color:rgba(255, 255, 255, 0.8);
+    /*padding: 15px;  */
+}
+.tt-message{
+    color: #f00;
+}
+.tt-header{
+    padding: 4px 5px;
+    text-align: center;
+    background-color: rgba(53, 142, 251, 0.8);
+    color: #FFF;
+}
+.tt-content{
+    padding: 10px;
+}
+.tt-inventory .key, .tt-demand .key{
+    display: inline-block;
+    width: 145px;
 }
 .chart-control-wrap{
     position: absolute;

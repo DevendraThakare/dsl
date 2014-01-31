@@ -60,7 +60,10 @@ function get_singleselect_filter(obj, name){
   });
   return html;
 }
-
+hide_graph = function(e){
+  if(e.which == 27)
+    $('.charts-wraper').removeClass('visible');
+}
 $(document).ready(function(){
   response=[{'01/01/2014': {'avail_inv':1000, 'req_inv':400}},{'08/01/2014' : {'avail_inv':1170, 'req_inv':  460}},
   {'15/01/2014' : {'avail_inv':660,  'req_inv':  1120}},{'22/01/2014' : {'avail_inv':1030, 'req_inv':  540}},
@@ -73,13 +76,10 @@ $(document).ready(function(){
   $('.listing-requests-chart-filter').html(get_multiselect_filter(owner_type_arr, 'owner_type'));
   $('.show-charts').click(function(e){
     $('.charts-wraper').addClass('visible');
+    $(document).on('keyup', hide_graph);
   });
   $('.close-charts').click(function(e){
     $('.charts-wraper').removeClass('visible');
-  });
-  $('body').keypress(function(e){
-    if(e.which == 27){
-      $('.charts-wraper').removeClass('visible');
-    }
+    $(document).off('keyup', hide_graph);
   });
 });

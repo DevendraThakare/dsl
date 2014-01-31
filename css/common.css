@@ -11,6 +11,7 @@ body{
     line-height: 20px;
     color: #333;
     background-color: #FFF;
+    overflow: hidden;
 }
 .clearfix:after {
    content: " ";
