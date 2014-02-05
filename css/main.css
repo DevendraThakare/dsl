@@ -297,7 +297,14 @@
     left: 25px;
 }
 
-.control{
+.csv-wrap{
+    position: absolute;
+    top: 190px;
+    right: 20px;
+}
+
+
+.control, .csv-link{
    line-height: 1.4em;
    display: block;
     cursor: pointer;
@@ -312,6 +319,11 @@
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+.csv-link{
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(53, 142, 251, 0.8);
 }
 .message{
     padding: 5px;
