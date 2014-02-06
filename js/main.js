@@ -4,12 +4,13 @@ var lon={};lon[40]=77.195251;lon[41]=77.436265;lon[75]=77.314728;lon[39]=77.3779
 var lat={};lat[40]=28.609732;lat[41]=28.671954;lat[75]=28.396123;lat[39]=28.548228;lat[76]=22.584735;lat[1]=19.114274;lat[74]=13.029858;lat[36]=17.394426;lat[37]=18.513352;lat[38]=12.96429;lat[35]=28.445943;
 var map;
 var html = '';
-var type = 1;
 var legends = [{text:'High inventory required', color:'#FC7272'}, {text:'Moderate inventory required',color:'#F9F96E'}, {text:'Neutral Area', color:'#86F290'}, {text:'Moderate traffic required', color:'#9AE7ED'}, {text:'High trafic required', color: '#9797FF'}];
 var typeahead_data = [];
 var polygon_arr = [];
 var unique=1;
-type = 'rent';
+var service = 'rent';
+var city_id = 1;
+var locality_id = null;
 var tooltip = function(){
   var id = 'tt';
   var top = 3;
@@ -86,9 +87,9 @@ var tooltip = function(){
   };
 }();
 
-function addPolygon(obj){
+function addPolygon(obj,locality_id){
     polygon = obj['encoded_polygon'];
-    decodePolygonMK2(polygon,obj['color'],obj['apartment_type_data'], obj['price_data'],obj['locality_name'],obj['ratio'],obj['status'],obj['lat'], obj['lon']).setMap(window.map);
+    decodePolygonMK2(locality_id, polygon,obj['color'],obj['apartment_type_data'], obj['price_data'],obj['locality_name'],obj['ratio'],obj['status'],obj['lat'], obj['lon']).setMap(window.map);
 }
 
 var styles= [
@@ -120,7 +121,7 @@ var styles= [
         }
     ,{ featureType: "road", stylers: [ { visibility: "off" } ] }
     ];
-decodePolygonMK2 = function(t,c,apartment_type_data, price_data, locality,ratio,status, lat, lng) {
+decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, locality,ratio,status, lat, lng) {
     var e = t.length, i = 0, n = [], o = 0, a = 0, s = false, r = google.maps.LatLng;
     while (i < e) {
         var l, p = 0, h = 0;
@@ -157,6 +158,7 @@ decodePolygonMK2 = function(t,c,apartment_type_data, price_data, locality,ratio,
       window.polygon = poly;
       latlng = event.latLng;
       html = '';
+      window.locality_id = locality_id;
       window.marker.setPosition(latlng);
       $('#info .locality-name').text(locality);
       apartment_type_data_obj = $.parseJSON(apartment_type_data);
@@ -275,14 +277,15 @@ function showAlerts(){
         $(this).closest('.has-children').addClass('alert');
     });
 }
-function draw(type){
+function draw(city_id,service){
   $.ajax({
     url:'http://analytics.housing.com/heatmap.php',
     type:'get',
-    data:  {city:$( ".city-menu .city.active").data('value'), type: type}
+    data:  {city:city_id, type: service}
   })
   .done(function(data){
     data = $.parseJSON(data)
+    console.log(data);
     keys = Object.keys(data);
     $(keys).each(function(i,key){
         obj = data[key];
@@ -293,13 +296,14 @@ function draw(type){
         tmp['lng']  = obj.lon;
         // tmp['value'] = JSON.stringify(lat_lng);
         typeahead_data.push(tmp);
-        addPolygon(obj)
+        addPolygon(obj,key)
     });
     $(document).trigger('data:fetched')
   });
 }
 function initialize() {
-    city_name = $( ".city-menu .city.active").data('value');
+    // city_name = $( ".city-menu .city.active").data('value');
+    update_csv_link_url();
     var mapOptions = {
       zoom: 11,
       panControl: false,
@@ -308,7 +312,7 @@ function initialize() {
       scaleControl: false,
       streetViewControl: false,
       overviewMapControl: false,
-      center: new google.maps.LatLng(lat[city_name],lon[city_name]),
+      center: new google.maps.LatLng(lat[window.city_id],lon[window.city_id]),
       mapTypeControlOptions: {
         style: styles
       }
@@ -316,7 +320,7 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
     map.setOptions({styles: styles});
-    draw(window.type);
+    draw(window.city_id, window.service);
     window.marker = new google.maps.Marker({
         position: new google.maps.LatLng(0,0),
         map: map
@@ -325,28 +329,39 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+function update_csv_link_url(){
+  csv_url = 'http://analytics.housing.com/city_data.php?';
+  csv_url = csv_url+'city='+window.city_id+'&';
+  csv_url = csv_url+'service='+window.service;
+  $('.csv-link').attr('href', csv_url);
+}
+
 $(document).ready(function(){
   $('.city-menu .city').click(function(e){
     e.stopPropagation();
     e.preventDefault();
+    window.city_id = $(this).data('value');
     $('.city-menu .city').removeClass('active');
     $(this).addClass('active');
     $('#info .apartment_type_info, #info .price_info').html('');
     $('#info, .map-wrap').removeClass('animate');
     $('#message').hide();
-    initialize(window.type);
+    update_csv_link_url();
+    initialize();
   });
 
   $('.controls-wrap .control').click(function(e){
     e.stopPropagation();
     e.preventDefault();
+    window.service = $(this).data('type');
     $('.controls-wrap .control').removeClass('active');
     $(this).addClass('active');
-    window.type = $(this).data('type');
     $('#info, .map-wrap').removeClass('animate');
     $('#message').hide();
-    initialize(window.type);
+    update_csv_link_url();
+    initialize();
   });
+
   $('#info').on('click', '.list-header', function(){
       if(!$(this).closest('ul').hasClass('un_expandable')){
         if($(this).closest('ul').hasClass('expanded'))

@@ -70,6 +70,16 @@ $(document).ready(function(){
   {'29/01/2014' : {'avail_inv':1030, 'req_inv':  540}},{'06/02/2014' : {'avail_inv':670,  'req_inv': 900}},
   {'14/02/2014' : {'avail_inv':740,  'req_inv':  990}},{'21/02/2014' : {'avail_inv':550,  'req_inv': 870}},
   {'28/02/2014' : {'avail_inv':1120, 'req_inv':   920}}];
+
+  $.ajax({
+    url:'http://analytics.housing.com/heatmap.php',
+    type:'get',
+    data:  {locality:locality_id, type: window.service}
+  })
+  .done(function(data){
+    console.log(data);
+  });
+
   drawChart(get_data_table(response), 'inventory');
   drawChart(get_data_table(response), 'listing_requests');
   $('.inv-chart-filter').html(get_multiselect_filter(apart_type_arr, 'appartment_type'));
