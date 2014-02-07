@@ -77,57 +77,59 @@ hide_graph = function(e){
     $('.charts-wraper').removeClass('visible');
 }
 
-function showCharts(){
-  $('.inv-chart-filter, .listing-requests-chart-filter').html('');
-  $('.charts-wraper').removeClass('loading');
-  $('.inv-chart-filter').html(get_multiselect_filter(apart_type_arr, 'appartment_type'));
-  $('.listing-requests-chart-filter').html(get_multiselect_filter(owner_type_arr, 'owner_type'));
-  $.when($.ajax({
+inv_ajax = function(params){ return $.ajax({
     url:'http://analytics.housing.com/locality_invent.php',
     type:'get',
-    data:  {lid:locality_id, cat: service}
-  }),
-    $.ajax({
+    data:  params
+  });
+}
+
+listing_requests_ajax = function(params){
+  return $.ajax({
     url:'http://analytics.housing.com/locality_listing_requests.php',
     type:'get',
-    data:  {lid:locality_id}
-  }))
-  .done(function(invent_data, list_req_data) { 
-    invent_data_obj = JSON.parse(invent_data[0]);
-    list_req_data_obj = JSON.parse(list_req_data[0]);
-    drawChart(get_data_table(invent_data_obj, 'inventory'), 'inventory');
-    drawChart(get_data_table(list_req_data_obj, 'listing_requests'), 'listing_requests');
-    $('.charts-wraper').removeClass('loading');
-  });
-
-  // $.ajax({
-  //   url:'http://analytics.housing.com/locality_listing_requests.php',
-  //   type:'get',
-  //   data:  {lid:locality_id}
-  // })
-  // .done(function(data){
-  //   console.log(data);
-  // });
-
-  // $.ajax({
-  //   url:'http://analytics.housing.com/locality_invent.php',
-  //   type:'get',
-  //   data:  {lid:locality_id, cat: service}
-  // })
-  // .done(function(data){
-  //   console.log(data);
-  // });
+    data: params
+  })
 }
 
 $(document).ready(function(){
-  // response=[{'01/01/2014': {'avail_inv':1000, 'req_inv':400}},{'08/01/2014' : {'avail_inv':1170, 'req_inv':  460}},
-  // {'15/01/2014' : {'avail_inv':660,  'req_inv':  1120}},{'22/01/2014' : {'avail_inv':1030, 'req_inv':  540}},
-  // {'29/01/2014' : {'avail_inv':1030, 'req_inv':  540}},{'06/02/2014' : {'avail_inv':670,  'req_inv': 900}},
-  // {'14/02/2014' : {'avail_inv':740,  'req_inv':  990}},{'21/02/2014' : {'avail_inv':550,  'req_inv': 870}},
-  // {'28/02/2014' : {'avail_inv':1120, 'req_inv':   920}}];
-  
+
+  $('body').on('load:all_charts', function(){
+    // $('.inv-chart-filter, .listing-requests-chart-filter').html('');
+    $('.charts-wraper').addClass('loading');
+    invent_params = {lid:locality_id, cat: service};
+    listing_requests_params = {lid:locality_id};
+    $.when(inv_ajax(invent_params), listing_requests_ajax(listing_requests_params))
+    .done(function(invent_data, list_req_data) { 
+      invent_data_obj = JSON.parse(invent_data[0]);
+      list_req_data_obj = JSON.parse(list_req_data[0]);
+      $('.charts-wraper').removeClass('loading');
+      $('.inv-chart-filter').html(get_singleselect_filter(apart_type_arr, 'appartment_type'));
+      $('.listing-requests-chart-filter').html(get_multiselect_filter(owner_type_arr, 'owner_type'));
+      drawChart(get_data_table(invent_data_obj, 'inventory'), 'inventory');
+      drawChart(get_data_table(list_req_data_obj, 'listing_requests'), 'listing_requests');
+    });
+  });
+
+  $('body').on('load:invent_charts', function(e, apt_type){
+    $('.inv-chart-filter').addClass('loading');
+    console.log(apt_type)
+    invent_params = {lid:locality_id, cat: service, apt_type: apt_type};
+    $.when(inv_ajax(invent_params))
+    .done(function(invent_data) { 
+      console.log(invent_data);
+      invent_data_obj = JSON.parse(invent_data);
+      $('.inv-chart-filter').removeClass('loading');
+      drawChart(get_data_table(invent_data_obj, 'inventory'), 'inventory');
+    });
+  });
+
+  $('.inv-chart-wrap').on('click', 'input[type="radio"]', function(){
+    $('body').trigger('load:invent_charts', [$(this).val()]);
+  }); 
+
   $('.show-charts').click(function(e){
-    showCharts();
+    $('body').trigger('load:all_charts');
     $('.charts-wraper').addClass('visible');
     $(document).on('keyup', hide_graph);
   });
