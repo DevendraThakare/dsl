@@ -11,6 +11,7 @@ var unique=1;
 var service = 'rent';
 var city_id = 1;
 var locality_id = null;
+var locality_name = '';
 var tooltip = function(){
   var id = 'tt';
   var top = 3;
@@ -159,6 +160,7 @@ decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, lo
       latlng = event.latLng;
       html = '';
       window.locality_id = locality_id;
+      window.locality_name =locality;
       window.marker.setPosition(latlng);
       $('#info .locality-name').text(locality);
       apartment_type_data_obj = $.parseJSON(apartment_type_data);
@@ -285,7 +287,6 @@ function draw(city_id,service){
   })
   .done(function(data){
     data = $.parseJSON(data)
-    console.log(data);
     keys = Object.keys(data);
     $(keys).each(function(i,key){
         obj = data[key];

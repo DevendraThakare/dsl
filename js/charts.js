@@ -18,14 +18,14 @@ function drawChart(data,type) {
   switch(type){
     case 'inventory' : 
       options = {
-        title: 'Demand Supply Graph for Powai'
+        title: 'Demand Supply Graph for '+window.locality_name
       };
       chart = new google.visualization.LineChart(document.getElementById('inv-chart'));
       break;
 
     case 'listing_requests' : 
       options = {
-        title: 'Listings Requests Graph for Powai'
+        title: 'Listings Requests Graph for '+window.locality_name
       };
       chart = new google.visualization.LineChart(document.getElementById('listing-requests-chart'));
       break;
@@ -35,13 +35,25 @@ function drawChart(data,type) {
 
 function get_data_table(obj, type){
   var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Task');
-  data.addColumn('number', 'Avail. Inventory');
-  data.addColumn('number', 'Req. Inventory');
-  _.each(obj, function(el){
-    key = Object.keys(el)[0];
-    data.addRow([key, el[key].avail_inv, el[key].req_inv]);
-  });
+  switch(type){
+    case 'inventory' : 
+      data.addColumn('string', 'Task');
+      data.addColumn('number', 'Avail. Inventory');
+      data.addColumn('number', 'Req. Inventory');
+      _.each(obj, function(el,i){
+        data.addRow([i, parseInt(el.avail_inv), parseInt(el.req_inv)]);
+      });
+      break;
+
+    case 'listing_requests' : 
+      data.addColumn('string', 'Task');
+      data.addColumn('number', 'Listing Requests');
+      _.each(obj, function(el,i){
+        data.addRow([i, parseInt(el.lr)]);
+      });
+      break;
+  }
+  
   return data
 }
 
@@ -64,27 +76,58 @@ hide_graph = function(e){
   if(e.which == 27)
     $('.charts-wraper').removeClass('visible');
 }
-$(document).ready(function(){
-  response=[{'01/01/2014': {'avail_inv':1000, 'req_inv':400}},{'08/01/2014' : {'avail_inv':1170, 'req_inv':  460}},
-  {'15/01/2014' : {'avail_inv':660,  'req_inv':  1120}},{'22/01/2014' : {'avail_inv':1030, 'req_inv':  540}},
-  {'29/01/2014' : {'avail_inv':1030, 'req_inv':  540}},{'06/02/2014' : {'avail_inv':670,  'req_inv': 900}},
-  {'14/02/2014' : {'avail_inv':740,  'req_inv':  990}},{'21/02/2014' : {'avail_inv':550,  'req_inv': 870}},
-  {'28/02/2014' : {'avail_inv':1120, 'req_inv':   920}}];
 
-  $.ajax({
-    url:'http://analytics.housing.com/heatmap.php',
-    type:'get',
-    data:  {locality:locality_id, type: window.service}
-  })
-  .done(function(data){
-    console.log(data);
-  });
-
-  drawChart(get_data_table(response), 'inventory');
-  drawChart(get_data_table(response), 'listing_requests');
+function showCharts(){
+  $('.inv-chart-filter, .listing-requests-chart-filter').html('');
+  $('.charts-wraper').removeClass('loading');
   $('.inv-chart-filter').html(get_multiselect_filter(apart_type_arr, 'appartment_type'));
   $('.listing-requests-chart-filter').html(get_multiselect_filter(owner_type_arr, 'owner_type'));
+  $.when($.ajax({
+    url:'http://analytics.housing.com/locality_invent.php',
+    type:'get',
+    data:  {lid:locality_id, cat: service}
+  }),
+    $.ajax({
+    url:'http://analytics.housing.com/locality_listing_requests.php',
+    type:'get',
+    data:  {lid:locality_id}
+  }))
+  .done(function(invent_data, list_req_data) { 
+    invent_data_obj = JSON.parse(invent_data[0]);
+    list_req_data_obj = JSON.parse(list_req_data[0]);
+    drawChart(get_data_table(invent_data_obj, 'inventory'), 'inventory');
+    drawChart(get_data_table(list_req_data_obj, 'listing_requests'), 'listing_requests');
+    $('.charts-wraper').removeClass('loading');
+  });
+
+  // $.ajax({
+  //   url:'http://analytics.housing.com/locality_listing_requests.php',
+  //   type:'get',
+  //   data:  {lid:locality_id}
+  // })
+  // .done(function(data){
+  //   console.log(data);
+  // });
+
+  // $.ajax({
+  //   url:'http://analytics.housing.com/locality_invent.php',
+  //   type:'get',
+  //   data:  {lid:locality_id, cat: service}
+  // })
+  // .done(function(data){
+  //   console.log(data);
+  // });
+}
+
+$(document).ready(function(){
+  // response=[{'01/01/2014': {'avail_inv':1000, 'req_inv':400}},{'08/01/2014' : {'avail_inv':1170, 'req_inv':  460}},
+  // {'15/01/2014' : {'avail_inv':660,  'req_inv':  1120}},{'22/01/2014' : {'avail_inv':1030, 'req_inv':  540}},
+  // {'29/01/2014' : {'avail_inv':1030, 'req_inv':  540}},{'06/02/2014' : {'avail_inv':670,  'req_inv': 900}},
+  // {'14/02/2014' : {'avail_inv':740,  'req_inv':  990}},{'21/02/2014' : {'avail_inv':550,  'req_inv': 870}},
+  // {'28/02/2014' : {'avail_inv':1120, 'req_inv':   920}}];
+  
   $('.show-charts').click(function(e){
+    showCharts();
     $('.charts-wraper').addClass('visible');
     $(document).on('keyup', hide_graph);
   });

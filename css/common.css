@@ -35,3 +35,7 @@ body{
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
+
+.loading {
+    background: url(/download.gif) center center no-repeat;
+}
