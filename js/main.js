@@ -287,6 +287,7 @@ function draw(city_id,service){
   })
   .done(function(data){
     data = $.parseJSON(data)
+    console.log(data);
     keys = Object.keys(data);
     $(keys).each(function(i,key){
         obj = data[key];

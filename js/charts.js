@@ -112,14 +112,12 @@ $(document).ready(function(){
   });
 
   $('body').on('load:invent_charts', function(e, apt_type){
-    $('.inv-chart-filter').addClass('loading');
-    console.log(apt_type)
+    $('#inv-chart').html('').addClass('loading');
     invent_params = {lid:locality_id, cat: service, apt_type: apt_type};
     $.when(inv_ajax(invent_params))
     .done(function(invent_data) { 
-      console.log(invent_data);
+      $('#inv-chart').removeClass('loading');
       invent_data_obj = JSON.parse(invent_data);
-      $('.inv-chart-filter').removeClass('loading');
       drawChart(get_data_table(invent_data_obj, 'inventory'), 'inventory');
     });
   });
