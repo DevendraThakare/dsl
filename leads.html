@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DS-Heat Map | Housing.com</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/charts.css">
+  </head>
+  <body>
+    <div id="main-content">
+      <div class="map-wrap">
+        <div id="map-canvas"></div>
+        <div id="city-list-container" style="display: inline-block;">
+          <ul class="city-menu">
+            <li class="active city" data-value="1">Mumbai</li>
+            <li class="city" data-value="40">Delhi</li>
+            <li class="city" data-value="35">Gurgaon</li>
+            <li class="city" data-value="37">Pune</li>
+            <li class="city" data-value="75">Faridabad</li>
+            <li class="city" data-value="41">Ghaziabad</li>
+            <li class="city" data-value="39">Noida</li>
+            <li class="city" data-value="36">Hyderabad</li>
+            <li class="city" data-value="74">Chennai</li>
+            <li class="city" data-value="38">Bangalore</li>
+            <li class="city" data-value="76">Kolkata</li>
+          </ul>
+        </div>
+        <div class="legends-wrap"></div>
+        <div class="controls-wrap">
+          <span class="control active" data-type="rent">Rent</span>
+          <span class="control" data-type="buy">Buy</span>
+          <span class="control" data-type="pg">PG</span>
+        </div>
+        <div class="csv-wrap">
+          <a href="#" class="csv-link active">CSV</a>
+        </div>
+        <div id="message">The Message</div>
+        <div class="query-wrap">
+          <input id="query" class="controls" type="text" placeholder="Enter a location">
+        </div>
+        <div class="charts-wraper clearfix">
+          <div class="charts-content">
+            <span class="close-charts">×</span>
+            <div class="inv-chart-wrap">
+              <div class="filter-wrap inv-chart-filter clearfix"></div>
+              <div id="inv-chart"></div>
+            </div>
+            <div class="listing-requests-chart-wrap">
+              <div class="filter-wrap listing-requests-chart-filter clearfix"></div>
+              <div id="listing-requests-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="info">
+        <div class="info-header">
+          <span class="locality-name"></span>
+        </div>
+        <div class="info-content">
+          <div class="price_wrap">
+            <div class="price_header">By Price Range <span class="sub">inventory / req. inventory</span></div>
+            <div class="price_info"></div>
+          </div>
+          <div class="apartment_type_wrap">
+            <div class="apartment_type_header">By Apartment Type <span class="sub">inventory / req. inventory</span></div>
+            <div class="apartment_type_info"></div>
+          </div>
+        </div>
+        <div class="chart-control-wrap">
+          <button class="show-charts btn">Show Charts</button>
+        </div>
+      </div>
+    </div>
+    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+    <script src='js/underscore-min.js'></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script type="text/javascript" src='js/typeahead.js'></script>
+    <script type="text/javascript" src='js/main.js'></script>
+    <script type="text/javascript" src='js/charts.js'></script>
+  </body>
+</html>
