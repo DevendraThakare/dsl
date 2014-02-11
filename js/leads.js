@@ -44,6 +44,8 @@ var map_styles= [
 
 var map_options = {
   zoom: 11,
+  minZoom:11,
+  maxZoom:18,
   panControl: false,
   zoomControl: false,
   mapTypeControl: false,
@@ -61,11 +63,11 @@ var marker_options = {
 }
 
 var circle_options = {
-  strokeColor: '#358EFB',
+  strokeColor: '#000',
   strokeOpacity: 0.9,
   strokeWeight: 2,
-  fillColor: '#358EFB',
-  fillOpacity: 0.5,
+  fillColor: '#000',
+  fillOpacity: 0.2,
   radius: 2500
 };
 
@@ -86,6 +88,19 @@ function initialize() {
 
   autocomplete = new google.maps.places.Autocomplete(autocomplete_input, autocomplete_options);
   autocomplete.bindTo('bounds', map);
+  circle_marker_options ={
+    // position: new google.maps.LatLng(obj.lat, obj.lon),
+    flat: true,
+    // map:map,
+    draggable: true,
+    anchor: RichMarkerPosition.MIDDLE,
+    content: '<div class="circle-marker small"><span class="marker-ico glyphicon glyphicon-record"></span></div>'
+  };
+  circle_marker = new RichMarker(circle_marker_options);
+  google.maps.event.addListener(circle_marker, 'position_changed', function() {
+    // log('Marker position: ' + marker.getPosition());
+    circle.setCenter(circle_marker.getPosition());
+  });
 
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
     var place = autocomplete.getPlace();
@@ -93,6 +108,7 @@ function initialize() {
       return;
     }
     lat_lng = place.geometry.location;
+    circle_marker.setOptions({position:lat_lng, map:map})
     circle.setCenter(lat_lng);
     map.setZoom(14);
     map.setCenter(lat_lng);
@@ -128,7 +144,7 @@ $(document).ready(function(){
           position: new google.maps.LatLng(obj.lat, obj.lon),
           flat: true,
           map:map,
-          anchor: RichMarkerPosition.MIDDLE,
+          anchor: RichMarkerPosition.BOTTOM_LEFT,
           content: '<div class="rich-marker small"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class="glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>'
         };
         rich_marker = new RichMarker(rich_marker_options);
