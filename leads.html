@@ -4,9 +4,10 @@
     <title>DS-Heat Map | Housing.com</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/charts.css">
+    <link rel="stylesheet" type="text/css" href="css/leads.css">
   </head>
   <body>
     <div id="main-content">
@@ -27,18 +28,15 @@
             <li class="city" data-value="76">Kolkata</li>
           </ul>
         </div>
-        <div class="legends-wrap"></div>
-        <div class="controls-wrap">
+        <!-- <div class="legends-wrap"></div> -->
+        <!-- <div class="controls-wrap">
           <span class="control active" data-type="rent">Rent</span>
           <span class="control" data-type="buy">Buy</span>
           <span class="control" data-type="pg">PG</span>
-        </div>
-        <div class="csv-wrap">
-          <a href="#" class="csv-link active">CSV</a>
-        </div>
+        </div> -->
         <div id="message">The Message</div>
         <div class="query-wrap">
-          <input id="query" class="controls" type="text" placeholder="Enter a location">
+          <input id="locality-filter" class="controls" type="text" placeholder="Enter a location">
         </div>
         <div class="charts-wraper clearfix">
           <div class="charts-content">
@@ -77,8 +75,7 @@
     <script src='js/underscore-min.js'></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-    <script type="text/javascript" src='js/typeahead.js'></script>
-    <script type="text/javascript" src='js/main.js'></script>
-    <script type="text/javascript" src='js/charts.js'></script>
+    <script type="text/javascript" src='js/leads.js'></script>
+    <script type="text/javascript" src='js/rich_marker.js'></script>
   </body>
 </html>

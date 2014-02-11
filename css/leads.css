@@ -1,0 +1,89 @@
+#locality-filter {
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#locality-filter {
+    background-color: #fff;
+    padding: 0 11px 0 13px;
+    width: 300px;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+}
+
+#locality-filter:focus {
+    border-color: #4d90fe;
+    margin-left: -1px;
+    padding-left: 14px;  /* Regular padding-left + 1. */
+    width: 301px;
+}
+.rich-marker .marker-wrap{
+    padding: 2px 10px;
+    display: inline-block;
+    background-color: #B62020;
+    color: #FFF;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+.rich-marker .marker-wrap:before{
+    position: absolute;
+    content:'';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-top-color: #B62020;
+    border-style: solid;
+    border-width: 5px;
+    bottom: -10px;
+    left: 12px;
+    /*margin-left: -5px;*/
+
+}
+.rich-marker .marker-text{
+    display: inline-block;
+    font-size: 11px;
+    font-weight: normal;
+    /*padding: 0px 12px;*/
+    position: relative;
+    /*top: -20px;
+    left: -25px;*/
+   /* background-color: #B62020;
+    color: #FFF;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);*/
+}
+.rich-marker.small .marker-text{
+    display: none;
+}
+.rich-marker:hover .marker-text{
+    display: inline-block;
+}
+.rich-marker:hover{
+    z-index: 1000;
+} 
+.rich-marker:hover .marker-ico{
+    color: #990006;
+    /*display: inline-block;*/
+}
+.rich-marker .glyphicon-map-marker{
+    font-size: 16px; 
+    position: relative;
+    top: 4px
+}
+.rich-marker .marker-ico{
+    font-size: 16px;
+    color: #B62020;
+    display: none;
+}
