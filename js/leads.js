@@ -129,9 +129,15 @@ $(document).ready(function(){
           flat: true,
           map:map,
           anchor: RichMarkerPosition.MIDDLE,
-          content: '<div class="rich-marker small"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class=" glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>'
+          content: '<div class="rich-marker small"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class="glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>'
         };
         rich_marker = new RichMarker(rich_marker_options);
+        google.maps.event.addListener( rich_marker, 'mouseover', function(event) {
+          this.setZIndex(1000)
+        });
+        google.maps.event.addListener( rich_marker, 'mouseout', function(event) {
+          this.setZIndex(1);
+        });
         rich_marker_arr.push(rich_marker)
       }
     });
