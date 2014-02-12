@@ -8,6 +8,7 @@ function draw(city_id,service){
   .done(function(data){
     data = $.parseJSON(data)
     keys = Object.keys(data);
+    typeahead_data = [];
     $(keys).each(function(i,key){
         obj = data[key];
         tmp={};

@@ -339,8 +339,10 @@ $(document).ready(function(){
   });
 
   $(document).on('data:fetched', function(){
-    $('#query').typeahead({
-      name: unique++,
+    console.log('ajhadkjh');
+    console.log(typeahead_data)
+    $('#query').typeahead('destroy').typeahead({
+      name: city_id,
       valueKey: 'locality_name',
       local: typeahead_data
     });
