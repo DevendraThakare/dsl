@@ -82,6 +82,7 @@ $(document).ready(function(){
     window.city_id = city_id;
     map.setOptions({center:new google.maps.LatLng(lat[window.city_id],lon[window.city_id]), zoom:11});
     $(document).trigger('show:colleges');
+    draw(window.city_id);
     // circle.setMap(null);
     // circle_marker.setMap(null);
   });
