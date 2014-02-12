@@ -1,4 +1,4 @@
-#locality-filter {
+/*#locality-filter {
     border: 1px solid transparent;
     border-radius: 2px 0 0 2px;
     box-sizing: border-box;
@@ -21,56 +21,29 @@
 #locality-filter:focus {
     border-color: #4d90fe;
     margin-left: -1px;
-    padding-left: 14px;  /* Regular padding-left + 1. */
+    padding-left: 14px;
     width: 301px;
-}
+}*/
 .rich-marker .marker-wrap{
-    /*padding: 2px 10px;*/
     display: inline-block;
-    /*background-color: #B62020;*/
     background-color: transparent;
     color: #B62020;
-    /*color: #FFF;*/
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    /*box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);*/
 }
 .rich-marker:hover .marker-wrap{
     color: #000;
 }
 .rich-marker .marker-wrap:before{
-    /*position: absolute;
-    content:'';
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-top-color: #B62020;
-    border-style: solid;
-    border-width: 5px;
-    bottom: -10px;
-    left: 12px;*/
     display: none;
-    /*margin-left: -5px;*/
 
 }
 .rich-marker .marker-text{
     display: inline-block;
     font-size: 14px;
     font-weight: normal;
-    /*padding: 0px 12px;*/
     position: relative;
     margin-left: 3px;
     top: -3px;
-    /*top: -20px;
-    left: -25px;*/
-   /* background-color: #B62020;
-    color: #FFF;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);*/
 }
 .rich-marker.small .marker-text{
     display: none;
@@ -83,7 +56,6 @@
 } 
 .rich-marker:hover .marker-ico{
     color: #990006;
-    /*display: inline-block;*/
 }
 .rich-marker .glyphicon-map-marker{
     font-size: 24px; 
