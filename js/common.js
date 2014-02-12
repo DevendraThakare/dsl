@@ -226,7 +226,13 @@ decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, lo
     tooltip_html = tooltip_html + '<div class="tt-message">'+message+'</div>';
     if(apartment_type_data_obj!=null){
       tooltip_html = tooltip_html + '<div class="tt-inventory"><span class="key">Total Inventory </span><span class="value">'+apartment_type_data_obj["inventory"]+'</span></div>';
-      tooltip_html = tooltip_html + '<div class="tt-demand"><span class="key">Required Inventory </span><span class="value">'+apartment_type_data_obj["req.inventory"]+'</span></div>';
+      if(apartment_type_data_obj["req.inventory"]!=null)
+        tooltip_html = tooltip_html + '<div class="tt-demand"><span class="key">Required Inventory </span><span class="value">'+apartment_type_data_obj["req.inventory"]+'</span></div>';
+      if(apartment_type_data_obj["opencrf_leads"]!=null)
+        tooltip_html = tooltip_html + '<div class="tt-demand"><span class="key">Open CRF Leads</span><span class="value">'+apartment_type_data_obj["opencrf_leads"]+'</span></div>';
+      if(apartment_type_data_obj["pyr_leads"]!=null){
+        tooltip_html = tooltip_html + '<div class="tt-demand"><span class="key">PYR Leads</span><span class="value">'+apartment_type_data_obj["pyr_leads"]+'</span></div>';
+      }
     }
     else{
       tooltip_html = tooltip_html + '<div class="tt-inventory"><span class="key">Total Inventory </span><span class="value">'+0+'</span></div>';
