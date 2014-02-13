@@ -130,7 +130,7 @@ function draw_rich_marker(type, obj,key){
     position: new google.maps.LatLng(obj.lat, obj.lng),
     flat: true,
     map:map,
-    anchor: RichMarkerPosition.BOTTOM,
+    anchor: RichMarkerPosition.BOTTOM_LEFT,
     content: content
   };
   rich_marker = new RichMarker(rich_marker_options);
