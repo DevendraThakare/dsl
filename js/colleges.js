@@ -120,13 +120,17 @@ function destroy_rich_markers(){
   rich_marker_arr.length = 0;
 }
 
-function draw_rich_marker(obj,key){
+function draw_rich_marker(type, obj,key){
+  if(type == 'office')
+    content = '<div class="rich-marker office"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class="glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>';
+  else
+    content = '<div class="rich-marker college"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class="glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>';
   rich_marker_options ={
     position: new google.maps.LatLng(obj.lat, obj.lng),
     flat: true,
     map:map,
     anchor: RichMarkerPosition.BOTTOM,
-    content: '<div class="rich-marker small"><span class="marker-ico glyphicon glyphicon-record"></span><span class="marker-wrap"><span class="glyphicon glyphicon-map-marker"></span><span class="marker-text">'+key+'</span></span></div>'
+    content: content
   };
   rich_marker = new RichMarker(rich_marker_options);
   google.maps.event.addListener( rich_marker, 'mouseover', function(event) {
@@ -150,15 +154,13 @@ $(document).ready(function(){
   $(document).on('show:colleges', function(){
     city_colleges = college_office_data['college'];
     city_offices = college_office_data['office'];
-    _.each(city_colleges, function(obj, key){
-      if(map){
-        draw_rich_marker(obj,key)
-      }
-    });
-    _.each(city_offices, function(obj, key){
-      if(map){
-        draw_rich_marker(obj,key)
-      }
-    });
+    if(map){
+      _.each(city_colleges, function(obj, key){
+        draw_rich_marker('college', obj, key);
+      });
+      _.each(city_offices, function(obj, key){
+        draw_rich_marker('office', obj, key)
+      });
+    }
   });
 });

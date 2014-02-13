@@ -9,15 +9,26 @@
 .rich-marker .marker-wrap{
     display: inline-block;
     background-color: transparent;
-    color: #B62020;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
-.rich-marker:hover .marker-wrap{
-    color: #000;
+
+.rich-marker.college .marker-wrap{
+    color: #B62020;
 }
+.rich-marker.college:hover .marker-wrap{
+    color: #680101;
+}
+
+.rich-marker.office .marker-wrap{
+    color: #2D3CA8;
+}
+
+.rich-marker.office:hover .marker-wrap{
+    color: #000F79;
+}
+
 .rich-marker .marker-wrap:before{
     display: none;
-
 }
 .rich-marker .marker-text{
     display: inline-block;
@@ -27,7 +38,7 @@
     margin-left: 3px;
     top: -3px;
 }
-.rich-marker.small .marker-text{
+.rich-marker .marker-text{
     display: none;
 }
 .rich-marker:hover .marker-text{
