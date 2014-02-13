@@ -36,7 +36,7 @@
     font-weight: normal;
     position: relative;
     margin-left: 3px;
-    top: -3px;
+    top: 2px;
 }
 .rich-marker .marker-text{
     display: none;
@@ -51,10 +51,13 @@
     color: #990006;
 }
 .rich-marker .glyphicon-map-marker{
-    font-size: 24px; 
+    font-size: 13px; 
     position: relative;
     top: 4px
 }
+/*.rich-marker:hover .glyphicon-map-marker{
+    font-size: 24px; 
+}*/
 .rich-marker .marker-ico{
     font-size: 16px;
     color: #B62020;
