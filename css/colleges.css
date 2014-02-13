@@ -1,29 +1,11 @@
-/*#locality-filter {
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+#query {
+    padding: 3px 20px;
+    width: 240px;
 }
-
-#locality-filter {
-    background-color: #fff;
-    padding: 0 11px 0 13px;
-    width: 300px;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    text-overflow: ellipsis;
+.tt-crf-leads .key, .tt-pyr-leads .key{
+    display: inline-block;
+    width: 145px;
 }
-
-#locality-filter:focus {
-    border-color: #4d90fe;
-    margin-left: -1px;
-    padding-left: 14px;
-    width: 301px;
-}*/
 .rich-marker .marker-wrap{
     display: inline-block;
     background-color: transparent;
