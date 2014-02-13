@@ -5,13 +5,13 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'), map_options);
   map.setOptions({styles: map_styles});
   draw(window.city_id);
-  marker = new google.maps.Marker({map: map});
+  marker = new google.maps.Marker();
 }
 
 function draw(city_id){
   destroy_polygons();
   destroy_rich_markers();
-
+  $('#query').typeahead('destroy').val('');
   $.ajax({
     url:'http://analytics.housing.com/heatmap_lead_invent.php?city=1',
     type:'get',
@@ -20,6 +20,7 @@ function draw(city_id){
   .done(function(data){
     data = $.parseJSON(data)
     keys = Object.keys(data);
+    typeahead_data = [];
     $(keys).each(function(i,key){
         obj = data[key];
         tmp={};
@@ -30,7 +31,7 @@ function draw(city_id){
         typeahead_data.push(tmp);
         addPolygon(obj,key)
     });
-    $(document).trigger('data:fetched')
+    $(document).trigger('data:fetched');
   });
 
   $.get('http://analytics.housing.com/get_insti.php?city='+city_id)
@@ -147,6 +148,7 @@ $(document).ready(function(){
   $(document).on('city:changed', function(e, city_id){
     window.city_id = city_id;
     map.setOptions({center:new google.maps.LatLng(lat[window.city_id],lon[window.city_id]), zoom:11});
+    marker.setMap(null);
     $(document).trigger('show:colleges');
     draw(window.city_id);
   });

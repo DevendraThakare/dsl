@@ -1,5 +1,6 @@
 function draw(city_id,service){
   destroy_polygons();
+  $('#query').typeahead('destroy').val('');
   $.ajax({
     url:'http://analytics.housing.com/heatmap.php',
     type:'get',
@@ -28,7 +29,7 @@ function addPolygon(obj,locality_id){
   decodePolygonMK2(locality_id, polygon,obj['color'],obj['apartment_type_data'], obj['price_data'],obj['locality_name'],obj['ratio'],obj['status'],obj['lat'], obj['lon']).setMap(window.map);
 }
 
-decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, locality,ratio,status, lat, lng) {
+decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, locality_name,ratio,status, lat, lng) {
   var e = t.length, i = 0, n = [], o = 0, a = 0, s = false, r = google.maps.LatLng;
   while (i < e) {
       var l, p = 0, h = 0;
@@ -67,10 +68,9 @@ decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, lo
     html = '';
     apartment_type_data_obj = null;
     price_data_obj = null;
-    window.locality_id = locality_id;
-    window.locality_name =locality;
-    window.marker.setPosition(latlng);
-    $('#info .locality-name').text(locality);
+    $(document).trigger('locality:changed', [locality_id, locality_name]);
+    marker.setOptions({map : map, position : latlng});
+    $('#info .locality-name').text(locality_name);
     if(apartment_type_data)
       apartment_type_data_obj = $.parseJSON(apartment_type_data);
     if(price_data)
@@ -109,7 +109,7 @@ decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, lo
     else
       message = 'Awesome!';
     this.setOptions({fillOpacity : 1.0,  strokeColor: '#A0A0A0', strokeWeight:2});
-    tooltip_html = '<div class="tt-header">'+locality+'</div><div class="tt-content">';
+    tooltip_html = '<div class="tt-header">'+locality_name+'</div><div class="tt-content">';
     tooltip_html = tooltip_html + '<div class="tt-message">'+message+'</div>';
     if(apartment_type_data_obj!=null){
       tooltip_html = tooltip_html + '<div class="tt-inventory"><span class="key">Total Inventory </span><span class="value">'+apartment_type_data_obj["inventory"]+'</span></div>';
@@ -201,13 +201,21 @@ $(document).ready(function(){
     window.city_id = city_id;
     update_csv_link_url();
     map.setOptions({center:new google.maps.LatLng(lat[window.city_id],lon[window.city_id]), zoom:11});
+    marker.setMap(null);
     draw(window.city_id, window.service);
+  });
+
+  $(document).on('locality:changed', function(e, locality_id, locality_name){
+    window.locality_id = locality_id;
+    window.locality_name =locality_name;
+    $('#query').val(locality_name);
   });
 
   $(document).on('service:changed', function(e, service){
     window.service = service;
     update_csv_link_url();
     map.setOptions({center:new google.maps.LatLng(lat[window.city_id],lon[window.city_id]), zoom:11});
+    marker.setMap(null);
     draw(window.city_id, window.service);
   });
 

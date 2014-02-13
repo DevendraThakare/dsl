@@ -168,7 +168,7 @@ $(document).ready(function(){
   });
 
   $(document).on('data:fetched', function(){
-    $('#query').typeahead('destroy').typeahead({
+    $('#query').typeahead({
       name: city_id,
       valueKey: 'locality_name',
       local: typeahead_data
@@ -181,6 +181,7 @@ $(document).ready(function(){
           return false;
       });
       google.maps.event.trigger(poly[0], 'click', {latLng:new google.maps.LatLng(datum.lat,datum.lng)});
+      marker.setOptions({map : map, position : new google.maps.LatLng(datum.lat, datum.lng)});
     });
   });
 
