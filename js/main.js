@@ -2,7 +2,7 @@ function draw(city_id,service){
   destroy_polygons();
   $('#query').typeahead('destroy').val('');
   $.ajax({
-    url:'http://analytics.housing.com/heatmap.php',
+    url:'http://10.1.8.18:8888/',
     type:'get',
     data:  {city:city_id, type: service}
   })
@@ -62,43 +62,43 @@ decodePolygonMK2 = function(locality_id, t,c,apartment_type_data, price_data, lo
   fillColor: c,
   fillOpacity: 0.7,
   });
-  google.maps.event.addListener(poly, 'click', function(event) {
-    window.polygon = poly;
-    latlng = event.latLng;
-    html = '';
-    apartment_type_data_obj = null;
-    price_data_obj = null;
-    $(document).trigger('locality:changed', [locality_id, locality_name]);
-    marker.setOptions({map : map, position : latlng});
-    $('#info .locality-name').text(locality_name);
-    if(apartment_type_data)
-      apartment_type_data_obj = $.parseJSON(apartment_type_data);
-    if(price_data)
-      price_data_obj = $.parseJSON(price_data);
-    $('#info .message').removeClass('alert');
-    if(apartment_type_data_obj){
-        $('#info .apartment_type_info, #info .price_info').html('');
-        makeTree(apartment_type_data_obj);
-        $('#info .info-content').find('.apartment_type_info').html(html);
-        html='';
-        if(price_data_obj)
-          makeTree(price_data_obj);
-        $('#info .info-content').find('.price_info').html(html);
-        if(ratio < 0.8)
-          $('#message').text('Traffic Required').addClass('alert');
-        else if(ratio > 1.25)
-          $('#message').text('Inventory Required').addClass('alert');
-        else
-          $('#message').text('Awesome!').removeClass('alert');
-    }
-    else{
-      $('#message').text('Sorry, no inventory found!').addClass('alert');
-      $('#info .info-content').find('.apartment_type_info').html('<div class="message">Sorry, no inventory found!</div>');
-      $('#info .info-content').find('.price_info').html('<div class="message">Sorry, no inventory found!</div>');
-    }
-    $('#info, .map-wrap').addClass('animate');
-    $('#message').show();
-  });
+  // google.maps.event.addListener(poly, 'click', function(event) {
+  //   window.polygon = poly;
+  //   latlng = event.latLng;
+  //   html = '';
+  //   apartment_type_data_obj = null;
+  //   price_data_obj = null;
+  //   $(document).trigger('locality:changed', [locality_id, locality_name]);
+  //   marker.setOptions({map : map, position : latlng});
+  //   $('#info .locality-name').text(locality_name);
+  //   if(apartment_type_data)
+  //     apartment_type_data_obj = $.parseJSON(apartment_type_data);
+  //   if(price_data)
+  //     price_data_obj = $.parseJSON(price_data);
+  //   $('#info .message').removeClass('alert');
+  //   if(apartment_type_data_obj){
+  //       $('#info .apartment_type_info, #info .price_info').html('');
+  //       makeTree(apartment_type_data_obj);
+  //       $('#info .info-content').find('.apartment_type_info').html(html);
+  //       html='';
+  //       if(price_data_obj)
+  //         makeTree(price_data_obj);
+  //       $('#info .info-content').find('.price_info').html(html);
+  //       if(ratio < 0.8)
+  //         $('#message').text('Traffic Required').addClass('alert');
+  //       else if(ratio > 1.25)
+  //         $('#message').text('Inventory Required').addClass('alert');
+  //       else
+  //         $('#message').text('Awesome!').removeClass('alert');
+  //   }
+  //   else{
+  //     $('#message').text('Sorry, no inventory found!').addClass('alert');
+  //     $('#info .info-content').find('.apartment_type_info').html('<div class="message">Sorry, no inventory found!</div>');
+  //     $('#info .info-content').find('.price_info').html('<div class="message">Sorry, no inventory found!</div>');
+  //   }
+  //   $('#info, .map-wrap').addClass('animate');
+  //   $('#message').show();
+  // });
 
   google.maps.event.addListener(poly, 'mouseover', function(event) {
   apartment_type_data_obj = $.parseJSON(apartment_type_data);
